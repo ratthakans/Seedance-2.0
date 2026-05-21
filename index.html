@@ -95,10 +95,7 @@
       </div>
     </div>
     <div class="settings-grid">
-      <div class="field" style="margin:0"><label>THB / $1</label><input type="number" id="rate" value="35" oninput="syncAll('rate')"></div>
-      <div class="field" style="margin:0"><label>Flagship ($/1M)</label><input type="number" id="pF" value="4.73" step="0.01" oninput="syncAll('rate')"></div>
-      <div class="field" style="margin:0"><label>Fast ($/1M)</label><input type="number" id="pS" value="3.63" step="0.01" oninput="syncAll('rate')"></div>
-      <div class="field" style="margin:0"><label>Partner Fee %</label><input type="number" id="fee" value="10" step="0.5" oninput="syncAll('rate')"></div>
+      <div class="field" style="margin:0"><label>ต้นทุนแพ็กเกจ (฿/Credit)</label><input type="number" id="thb_per_cr" value="1.18" step="0.01" oninput="syncAll('rate')"></div>
       <div class="field accent" style="margin:0"><label>✕ Markup Multiplier</label><input type="number" id="markup" value="2.0" step="0.1" min="1" oninput="syncAll('rate')"></div>
     </div>
   </div>
@@ -165,7 +162,6 @@
         <!-- Meta info -->
         <div class="results res-clean" style="margin-top: 16px;">
           <div class="res-row hi"><span class="res-label">กำไรสุทธิ</span><span class="res-val vr" id="omni_profit">฿0</span></div>
-          <div class="res-row"><span class="res-label">ต้นทุน (USD)</span><span class="res-val" id="omni_usd">$0.0000</span></div>
         </div>
       </div>
     </div>
@@ -182,7 +178,7 @@
     <div class="tbl-wrap">
       <table>
         <thead><tr>
-          <th style="padding-left:40px">โมเดล</th><th>Resolution</th><th>Token/วิ</th><th>Credit/วิ</th>
+          <th style="padding-left:40px">โมเดล</th><th>Resolution</th><th>Credit/วิ</th>
           <th>นาทีสูงสุด</th><th>ต้นทุน/นาที</th><th>ราคาขาย/นาที</th><th style="padding-right:40px">กำไร/นาที</th>
         </tr></thead>
         <tbody id="cmp_body"></tbody>
@@ -202,39 +198,33 @@
     <div class="formula-grid">
       <div class="f-item">
         <div class="f-step">Step 01</div>
-        <div class="f-title">Token ต่อวินาที</div>
-        <div class="f-code">TPS = (W × H × 24) ÷ 1024</div>
-        <div class="f-desc">720p = 21,600 · 1080p = 48,600 tok/s<br>เฟรมเรต 24fps คงที่ทุกโมเดล</div>
+        <div class="f-title">เช็คเรท Credit ของโมเดล</div>
+        <div class="f-code">F720=12 · F1080=30 · Fast=10 cr/s</div>
+        <div class="f-desc">ความละเอียดสูงจะใช้ Credit ต่อวินาทีมากกว่า</div>
       </div>
       <div class="f-item">
         <div class="f-step">Step 02</div>
-        <div class="f-title">Credit ต่อวินาที</div>
-        <div class="f-code">1 Credit = 1,800 Tokens<br>F720=12 · F1080=30 · Fast=10 cr/s</div>
-        <div class="f-desc">ค่าคงที่ Seedance 2.0 ทุกโมเดล</div>
+        <div class="f-title">คำนวณ Credit รวม</div>
+        <div class="f-code">Credit = ความยาว (วิ) × เรทโมเดล</div>
+        <div class="f-desc">เช่น คลิป 5 วินาที (Fast) = 5 × 10 = 50 Credit</div>
       </div>
       <div class="f-item">
         <div class="f-step">Step 03</div>
-        <div class="f-title">ราคา API + Partner Fee</div>
-        <div class="f-code">Price = Base × (1 + Fee% ÷ 100)</div>
-        <div class="f-desc">Fee 10% → คูณ 1.10 เข้าราคาต่อ 1M Token</div>
+        <div class="f-title">คำนวณต้นทุน (เงินบาท)</div>
+        <div class="f-code">ต้นทุน = Credit รวม × ต้นทุนแพ็กเกจ</div>
+        <div class="f-desc">เช่น 50 Credit × ฿1.18 = ฿59.00</div>
       </div>
       <div class="f-item">
         <div class="f-step">Step 04</div>
-        <div class="f-title">ต้นทุน → THB</div>
-        <div class="f-code">Cost = (Tokens ÷ 1M) × Price × Rate</div>
-        <div class="f-desc">แปลง USD เป็น THB ตามอัตราที่ตั้ง</div>
-      </div>
-      <div class="f-item">
-        <div class="f-step">Step 05</div>
         <div class="f-title">ราคาขาย & กำไร</div>
-        <div class="f-code">Sell = Cost × Markup<br>Profit = Sell − Cost</div>
-        <div class="f-desc">2× = กำไร 100% · 1.5× = กำไร 50%</div>
+        <div class="f-code">ราคาขาย = ต้นทุน × Markup<br>กำไร = ราคาขาย − ต้นทุน</div>
+        <div class="f-desc">กำหนด Markup 2.0 เท่ากับบวกกำไร 100%</div>
       </div>
-      <div class="f-item">
-        <div class="f-step">Step 06</div>
-        <div class="f-title">งบ → นาที (ย้อนกลับ)</div>
-        <div class="f-code">MaxTok = (Budget ÷ Rate ÷ Price) × 1M<br>MaxMin = MaxTok ÷ TPS ÷ 60</div>
-        <div class="f-desc">แปลงงบกลับเป็นนาทีวิดีโอที่ผลิตได้</div>
+      <div class="f-item" style="grid-column: 1 / -1;">
+        <div class="f-step">Tips</div>
+        <div class="f-title">Token เทียบเท่า</div>
+        <div class="f-code">1 Credit = 1,800 Tokens</div>
+        <div class="f-desc">ระบบประมวลผลวิดีโอ Seedance 2.0 มีเรทตายตัว คือ 1 Credit จะมีค่าเท่ากับการประมวลผล 1,800 Tokens เสมอ คุณจึงไม่ต้องกังวลเรื่องการแปลง Token ในการประเมินราคาเลย</div>
       </div>
     </div>
   </div>
@@ -249,8 +239,6 @@
 
 <script>
 // ── Helpers ──
-const TPS720  = (1280*720*24)/1024;
-const TPS1080 = (1920*1080*24)/1024;
 const CR = { f720:12, f1080:30, s720:10, s1080:27 };
 const TOKENS_PER_CR = 1800;
 
@@ -260,71 +248,63 @@ const g    = id => parseFloat(document.getElementById(id).value) || 0;
 const set  = (id, v) => document.getElementById(id).textContent = v;
 
 function getGlobals() {
-  const rate=g('rate')||35, pF=g('pF')||4.73, pS=g('pS')||3.63, fee=g('fee'), mk=g('markup')||1;
-  const fm = 1 + fee/100;
-  return { rate, rF: pF*fm, rS: pS*fm, mk };
+  const costPerCr = g('thb_per_cr') || 1.18;
+  const mk = g('markup') || 1;
+  return { costPerCr, mk };
 }
 
 let lastEdited = 'dur'; // Default anchor point
 
 function getConstants() {
-  const mdl = document.getElementById('omni_model').value;
-  const res = document.getElementById('omni_res').value;
-  const { rate, rF, rS, mk } = getGlobals();
+  const mdl = document.getElementById('omni_model').value; // 'f' or 's'
+  const res = document.getElementById('omni_res').value;   // '720' or '1080'
+  const { costPerCr, mk } = getGlobals();
   
-  const tps = res === '1080' ? TPS1080 : TPS720;
-  const pm = mdl === 'f' ? rF : rS; // USD per 1M tokens
-  
+  const crPerSec = CR[mdl + res] || 12; 
   const qty = g('omni_qty') || 1;
   
-  return { rate, mk, tps, pm, qty, rF, rS };
+  return { costPerCr, mk, crPerSec, qty };
 }
 
 function syncAll(source) {
-  // If user changed settings, model, res, or qty, we keep the last anchor point to recalculate based on it.
   if (source !== 'rate' && source !== 'model' && source !== 'res' && source !== 'qty') {
     if (source) lastEdited = source;
   }
   
   const c = getConstants();
-  let tok = 0;
+  let cr = 0; // Credit is our absolute truth anchor
   
-  // 1. Calculate Tokens (the absolute truth) from the currently anchored input
   if (lastEdited === 'dur') {
     const dur = g('omni_dur');
-    tok = dur * c.qty * c.tps;
+    cr = dur * c.qty * c.crPerSec;
   } else if (lastEdited === 'min') {
     const mins = g('omni_min');
     const dur = (mins * 60) / c.qty;
-    tok = dur * c.qty * c.tps;
+    cr = dur * c.qty * c.crPerSec;
   } else if (lastEdited === 'tok') {
-    tok = g('omni_tok');
+    const tok = g('omni_tok');
+    cr = tok / TOKENS_PER_CR;
   } else if (lastEdited === 'cr') {
-    const cr = g('omni_cr');
-    tok = cr * TOKENS_PER_CR;
+    cr = g('omni_cr');
   } else if (lastEdited === 'cost') {
     const costThb = g('omni_cost');
-    const costUsd = costThb / c.rate;
-    tok = (costUsd / c.pm) * 1e6;
+    cr = costThb / c.costPerCr;
   } else if (lastEdited === 'budget') {
     const budget = g('omni_budget');
     const costThb = budget / c.mk;
-    const costUsd = costThb / c.rate;
-    tok = (costUsd / c.pm) * 1e6;
+    cr = costThb / c.costPerCr;
   }
 
-  // 2. Compute all other values from `tok`
-  const durTotal = tok / c.tps;
+  // Compute all other values from `cr`
+  const durTotal = cr / c.crPerSec;
   const durPerClip = c.qty > 0 ? durTotal / c.qty : 0;
   const mins = durTotal / 60;
-  const cr = tok / TOKENS_PER_CR;
-  const costUsd = (tok / 1e6) * c.pm;
-  const costThb = costUsd * c.rate;
+  const tok = cr * TOKENS_PER_CR;
+  const costThb = cr * c.costPerCr;
   const budget = costThb * c.mk;
   const profit = budget - costThb;
   
-  // 3. Update DOM inputs safely (skip the one user is currently typing to prevent jumping cursors)
-  // We use .toFixed or Math.round to avoid commas in <input type="number">
+  // Update DOM safely
   if (source !== 'dur') document.getElementById('omni_dur').value = (Math.round(durPerClip * 10) / 10).toString();
   if (source !== 'min') document.getElementById('omni_min').value = (Math.round(mins * 100) / 100).toString();
   if (source !== 'tok') document.getElementById('omni_tok').value = Math.round(tok).toString();
@@ -332,36 +312,36 @@ function syncAll(source) {
   if (source !== 'cost') document.getElementById('omni_cost').value = (Math.round(costThb * 100) / 100).toString();
   if (source !== 'budget') document.getElementById('omni_budget').value = Math.round(budget).toString();
   
-  // Update text results
   set('omni_profit', '฿' + fmt(profit));
-  set('omni_usd', '$' + fmt(costUsd, 4));
   
-  // Update comparison table
-  updateComparison(budget, c.rate, c.mk, c.rF, c.rS);
+  updateComparison(budget, c.costPerCr, c.mk);
 }
 
-function updateComparison(budget, rate, mk, rF, rS) {
+function updateComparison(budget, costPerCr, mk) {
   set('cmp_lbl', '฿' + fmt(budget, 0));
   const rows = [
-    { m:'Flagship', r:'720p',  tps:TPS720,  cr:12, pm:rF },
-    { m:'Flagship', r:'1080p', tps:TPS1080, cr:30, pm:rF },
-    { m:'Fast',     r:'720p',  tps:TPS720,  cr:10, pm:rS },
-    { m:'Fast',     r:'1080p', tps:TPS1080, cr:27, pm:rS },
+    { m:'Flagship', r:'720p',  cr:12 },
+    { m:'Flagship', r:'1080p', cr:30 },
+    { m:'Fast',     r:'720p',  cr:10 },
+    { m:'Fast',     r:'1080p', cr:27 },
   ];
   const tbody = document.getElementById('cmp_body');
   tbody.innerHTML = '';
   rows.forEach(r => {
-    const mt = budget>0 ? (budget/rate/r.pm)*1e6 : 0;
-    const ms = budget>0 ? mt/r.tps : 0;
-    const mm = budget>0 ? ms/60 : 0;
-    const cpm = (r.tps*60/1e6)*r.pm*rate;
-    const spm = cpm*mk;
-    const ppm = spm-cpm;
+    // If budget is positive, find out how many credits we get, then how many seconds that is
+    const totalCr = budget>0 ? budget / (costPerCr * mk) : 0;
+    const ms = budget>0 ? totalCr / r.cr : 0;
+    const mm = budget>0 ? ms / 60 : 0;
+    
+    // Cost per minute = (60 secs * crPerSec) * costPerCr
+    const cpm = (60 * r.cr) * costPerCr;
+    const spm = cpm * mk;
+    const ppm = spm - cpm;
+    
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td style="padding-left:40px"><span class="tag${r.m==='Flagship'?' red':''}">${r.m}</span></td>
       <td><span class="tag">${r.r}</span></td>
-      <td class="mono">${fmti(r.tps)}</td>
       <td class="mono">${r.cr}</td>
       <td class="mono">${fmt(mm)} นาที</td>
       <td class="mono">฿${fmt(cpm)}</td>

@@ -165,189 +165,81 @@
 </div>
 
 <!-- PACKAGES LIST -->
-<div class="pkg-list">
+<!-- PRICING TABLE -->
+<div class="pricing-table-wrap" style="margin-bottom: 40px; overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-sm);">
+  <table class="pricing-table" style="width: 100%; border-collapse: collapse; min-width: 800px;">
+    <thead>
+      <tr style="background: var(--black); color: var(--snow);">
+        <th style="padding: 16px 24px; text-align: left; font-family: var(--f-mono); font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase;">Package</th>
+        <th style="padding: 16px 24px; text-align: left; font-family: var(--f-thai); font-size: 14px;">ราคา/เดือน</th>
+        <th style="padding: 16px 24px; text-align: left; font-family: var(--f-mono); font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase;">Credits</th>
+        <th style="padding: 16px 24px; text-align: left; font-family: var(--f-mono); font-size: 14px;">฿/Credit</th>
+        <th style="padding: 16px 24px; text-align: left; font-family: var(--f-mono); font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase;">Fast 720p</th>
+        <th style="padding: 16px 24px; text-align: left; font-family: var(--f-thai); font-size: 14px;">เหมาะกับ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Free Trial -->
+      <tr style="background: var(--snow); border-bottom: 1px solid var(--border2);">
+        <td style="padding: 20px 24px; font-family: var(--f-display); font-size: 18px; font-weight: 700;">Free Trial</td>
+        <td style="padding: 20px 24px; font-family: var(--f-mono); font-size: 18px; font-weight: 500;">฿0</td>
+        <td style="padding: 20px 24px; font-family: var(--f-mono); font-size: 16px;">100 · 7d</td>
+        <td style="padding: 20px 24px; font-family: var(--f-mono); font-size: 16px;">—</td>
+        <td style="padding: 20px 24px; font-family: var(--f-mono); font-size: 16px; color: var(--muted);">~10s</td>
+        <td style="padding: 20px 24px; font-family: var(--f-thai); font-size: 15px; color: var(--muted);">ทดลองก่อนซื้อ</td>
+      </tr>
+      
+      <!-- Pay-as-you-go -->
+      <tr style="background: var(--surface); border-bottom: 1px solid var(--border2);">
+        <td style="padding: 20px 24px; font-family: var(--f-display); font-size: 18px; font-weight: 700;">Pay-as-you-go</td>
+        <td style="padding: 20px 24px; font-family: var(--f-mono); font-size: 16px;">topup ฿500+</td>
+        <td style="padding: 20px 24px; font-family: var(--f-thai); font-size: 15px;">ตามจ่าย</td>
+        <td style="padding: 20px 24px; font-family: var(--f-mono); font-size: 18px; font-weight: 700;">฿0.79</td>
+        <td style="padding: 20px 24px; font-family: var(--f-mono); font-size: 16px; color: var(--muted);">variable</td>
+        <td style="padding: 20px 24px; font-family: var(--f-thai); font-size: 15px; color: var(--muted);">ใช้นาน ๆ ครั้ง · ต่อ project</td>
+      </tr>
+      
+      <!-- Pro -->
+      <tr style="background: rgba(235, 89, 57, 0.08); border-bottom: 1px solid rgba(235, 89, 57, 0.15);">
+        <td style="padding: 20px 24px; font-family: var(--f-display); font-size: 18px; font-weight: 700; color: var(--red);">Pro</td>
+        <td style="padding: 20px 24px; font-family: var(--f-mono); font-size: 18px; font-weight: 700; color: var(--red);">฿590</td>
+        <td style="padding: 20px 24px; font-family: var(--f-mono); font-size: 16px;">500</td>
+        <td style="padding: 20px 24px; font-family: var(--f-mono); font-size: 16px;">฿1.18</td>
+        <td style="padding: 20px 24px; font-family: var(--f-mono); font-size: 16px;">~50s</td>
+        <td style="padding: 20px 24px; font-family: var(--f-thai); font-size: 15px;">creator · freelance</td>
+      </tr>
 
-  <!-- 1. STARTER -->
-  <div class="pkg-row">
-    <div class="pkg-header">
-      <div class="pkg-name-wrap">
-        <div class="pkg-name">Starter</div>
-        <div class="pkg-desc">Entry-level Volume</div>
-      </div>
-      <div class="pkg-price-wrap">
-        <div class="pkg-price-val"><span class="pkg-price-cur">$</span>9</div>
-        <div class="pkg-price-meta">One-time purchase<br>No expiry date</div>
-      </div>
-    </div>
-    <div class="pkg-sep"></div>
-    <div class="pkg-feat-grid">
-      <div class="pkg-feat-list">
-        <div class="pkg-feat-item">
-          <span class="pkg-feat-lbl">เครดิตที่ได้รับ</span>
-          <span class="pkg-feat-val">500 Credits</span>
-        </div>
-        <div class="pkg-feat-item">
-          <span class="pkg-feat-lbl">วิดีโอ 720p (Flagship)</span>
-          <span class="pkg-feat-val">~ 41 วินาที</span>
-        </div>
-        <div class="pkg-feat-item">
-          <span class="pkg-feat-lbl">วิดีโอ 1080p (Flagship)</span>
-          <span class="pkg-feat-val">~ 16 วินาที</span>
-        </div>
-      </div>
-      <div class="pkg-feat-list">
-        <div class="pkg-feat-item">
-          <span class="pkg-feat-lbl">ราคาต่อเครดิต</span>
-          <span class="pkg-feat-val">$0.018</span>
-        </div>
-        <div class="pkg-feat-item">
-          <span class="pkg-feat-lbl">ส่วนลด</span>
-          <span class="pkg-feat-val">ราคาปกติ</span>
-        </div>
-        <div class="pkg-feat-item">
-          <span class="pkg-feat-lbl">เหมาะสำหรับ</span>
-          <span class="pkg-feat-val">ทดลองใช้งาน</span>
-        </div>
-      </div>
-    </div>
-  </div>
+      <!-- Studio -->
+      <tr style="background: var(--snow); border-bottom: 1px solid var(--border2);">
+        <td style="padding: 20px 24px; font-family: var(--f-display); font-size: 18px; font-weight: 700;">Studio</td>
+        <td style="padding: 20px 24px; font-family: var(--f-mono); font-size: 18px; font-weight: 700;">฿2,900</td>
+        <td style="padding: 20px 24px; font-family: var(--f-mono); font-size: 16px;">3,000</td>
+        <td style="padding: 20px 24px; font-family: var(--f-mono); font-size: 16px;">฿0.97</td>
+        <td style="padding: 20px 24px; font-family: var(--f-mono); font-size: 16px;">~5 min</td>
+        <td style="padding: 20px 24px; font-family: var(--f-thai); font-size: 15px; color: var(--muted);">SME · ทีมเล็ก</td>
+      </tr>
 
-  <!-- 2. GROWTH -->
-  <div class="pkg-row featured">
-    <div class="pkg-header">
-      <div class="pkg-name-wrap">
-        <div class="pkg-name">Growth</div>
-        <div class="pkg-desc">Most Popular · Sweet Spot</div>
-      </div>
-      <div class="pkg-price-wrap">
-        <div class="pkg-badge">Recommended</div>
-        <div class="pkg-price-val"><span class="pkg-price-cur">$</span>30</div>
-        <div class="pkg-price-meta">One-time purchase<br>No expiry date</div>
-      </div>
-    </div>
-    <div class="pkg-sep"></div>
-    <div class="pkg-feat-grid">
-      <div class="pkg-feat-list">
-        <div class="pkg-feat-item">
-          <span class="pkg-feat-lbl">เครดิตที่ได้รับ</span>
-          <span class="pkg-feat-val">2,000 Credits</span>
-        </div>
-        <div class="pkg-feat-item">
-          <span class="pkg-feat-lbl">วิดีโอ 720p (Flagship)</span>
-          <span class="pkg-feat-val">~ 166 วินาที</span>
-        </div>
-        <div class="pkg-feat-item">
-          <span class="pkg-feat-lbl">วิดีโอ 1080p (Flagship)</span>
-          <span class="pkg-feat-val">~ 66 วินาที</span>
-        </div>
-      </div>
-      <div class="pkg-feat-list">
-        <div class="pkg-feat-item">
-          <span class="pkg-feat-lbl">ราคาต่อเครดิต</span>
-          <span class="pkg-feat-val">$0.015</span>
-        </div>
-        <div class="pkg-feat-item">
-          <span class="pkg-feat-lbl">ส่วนลด</span>
-          <span class="pkg-feat-val">ประหยัด 17%</span>
-        </div>
-        <div class="pkg-feat-item">
-          <span class="pkg-feat-lbl">เหมาะสำหรับ</span>
-          <span class="pkg-feat-val">โปรเจกต์ขนาดกลาง</span>
-        </div>
-      </div>
-    </div>
-  </div>
+      <!-- Agency -->
+      <tr style="background: var(--surface); border-bottom: 1px solid var(--border2);">
+        <td style="padding: 20px 24px; font-family: var(--f-display); font-size: 18px; font-weight: 700;">Agency</td>
+        <td style="padding: 20px 24px; font-family: var(--f-mono); font-size: 18px; font-weight: 700;">฿9,900</td>
+        <td style="padding: 20px 24px; font-family: var(--f-mono); font-size: 16px;">12,000</td>
+        <td style="padding: 20px 24px; font-family: var(--f-mono); font-size: 16px;">฿0.83</td>
+        <td style="padding: 20px 24px; font-family: var(--f-mono); font-size: 16px;">~20 min</td>
+        <td style="padding: 20px 24px; font-family: var(--f-thai); font-size: 15px; color: var(--muted);">agency tier 2-3</td>
+      </tr>
 
-  <!-- 3. DOMINATE -->
-  <div class="pkg-row">
-    <div class="pkg-header">
-      <div class="pkg-name-wrap">
-        <div class="pkg-name">Dominate</div>
-        <div class="pkg-desc">Aggressive Scale</div>
-      </div>
-      <div class="pkg-price-wrap">
-        <div class="pkg-price-val"><span class="pkg-price-cur">$</span>60</div>
-        <div class="pkg-price-meta">One-time purchase<br>No expiry date</div>
-      </div>
-    </div>
-    <div class="pkg-sep"></div>
-    <div class="pkg-feat-grid">
-      <div class="pkg-feat-list">
-        <div class="pkg-feat-item">
-          <span class="pkg-feat-lbl">เครดิตที่ได้รับ</span>
-          <span class="pkg-feat-val">5,000 Credits</span>
-        </div>
-        <div class="pkg-feat-item">
-          <span class="pkg-feat-lbl">วิดีโอ 720p (Flagship)</span>
-          <span class="pkg-feat-val">~ 416 วินาที</span>
-        </div>
-        <div class="pkg-feat-item">
-          <span class="pkg-feat-lbl">วิดีโอ 1080p (Flagship)</span>
-          <span class="pkg-feat-val">~ 166 วินาที</span>
-        </div>
-      </div>
-      <div class="pkg-feat-list">
-        <div class="pkg-feat-item">
-          <span class="pkg-feat-lbl">ราคาต่อเครดิต</span>
-          <span class="pkg-feat-val">$0.012</span>
-        </div>
-        <div class="pkg-feat-item">
-          <span class="pkg-feat-lbl">ส่วนลด</span>
-          <span class="pkg-feat-val">ประหยัด 33%</span>
-        </div>
-        <div class="pkg-feat-item">
-          <span class="pkg-feat-lbl">เหมาะสำหรับ</span>
-          <span class="pkg-feat-val">งานเชิงพาณิชย์</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 4. ENTERPRISE (Optional 4th tier based on previous data) -->
-  <div class="pkg-row">
-    <div class="pkg-header">
-      <div class="pkg-name-wrap">
-        <div class="pkg-name">Enterprise</div>
-        <div class="pkg-desc">For Teams & Agencies</div>
-      </div>
-      <div class="pkg-price-wrap">
-        <div class="pkg-price-val"><span class="pkg-price-cur">$</span>150</div>
-        <div class="pkg-price-meta">One-time purchase<br>No expiry date</div>
-      </div>
-    </div>
-    <div class="pkg-sep"></div>
-    <div class="pkg-feat-grid">
-      <div class="pkg-feat-list">
-        <div class="pkg-feat-item">
-          <span class="pkg-feat-lbl">เครดิตที่ได้รับ</span>
-          <span class="pkg-feat-val">15,000 Credits</span>
-        </div>
-        <div class="pkg-feat-item">
-          <span class="pkg-feat-lbl">วิดีโอ 720p (Flagship)</span>
-          <span class="pkg-feat-val">~ 1,250 วินาที</span>
-        </div>
-        <div class="pkg-feat-item">
-          <span class="pkg-feat-lbl">วิดีโอ 1080p (Flagship)</span>
-          <span class="pkg-feat-val">~ 500 วินาที</span>
-        </div>
-      </div>
-      <div class="pkg-feat-list">
-        <div class="pkg-feat-item">
-          <span class="pkg-feat-lbl">ราคาต่อเครดิต</span>
-          <span class="pkg-feat-val">$0.010</span>
-        </div>
-        <div class="pkg-feat-item">
-          <span class="pkg-feat-lbl">ส่วนลด</span>
-          <span class="pkg-feat-val">ประหยัด 44%</span>
-        </div>
-        <div class="pkg-feat-item">
-          <span class="pkg-feat-lbl">เหมาะสำหรับ</span>
-          <span class="pkg-feat-val">องค์กรขนาดใหญ่</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
+      <!-- Enterprise -->
+      <tr style="background: var(--black); color: var(--snow);">
+        <td style="padding: 20px 24px; font-family: var(--f-display); font-size: 18px; font-weight: 700;">Enterprise</td>
+        <td style="padding: 20px 24px; font-family: var(--f-mono); font-size: 18px; font-weight: 700;">฿29,000+</td>
+        <td style="padding: 20px 24px; font-family: var(--f-mono); font-size: 16px;">42,000+</td>
+        <td style="padding: 20px 24px; font-family: var(--f-mono); font-size: 16px;">฿0.69</td>
+        <td style="padding: 20px 24px; font-family: var(--f-mono); font-size: 16px;">~70 min</td>
+        <td style="padding: 20px 24px; font-family: var(--f-thai); font-size: 15px; color: rgba(253,253,249,0.7);">in-house brand · custom</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 
