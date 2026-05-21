@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIRST DANCE — Pricing & Credit Packages</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ── PRICING HORIZONTAL LAYOUT ── */
+.pkg-list { display: flex; flex-direction: column; gap: 20px; margin-bottom: 40px; }
+.pkg-row {
+  background: var(--snow);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 32px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.pkg-row.featured {
+  background: var(--black);
+  color: var(--snow);
+  border: 1px solid var(--black);
+}
+.pkg-row.featured::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 8px;
+  background: var(--red);
+}
+
+.pkg-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 24px;
+}
+.pkg-name-wrap { display: flex; flex-direction: column; gap: 6px; }
+.pkg-name {
+  font-family: var(--f-display);
+  font-size: 36px; font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+.pkg-desc {
+  font-family: var(--f-mono);
+  font-size: 11px; font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.pkg-row.featured .pkg-desc { color: rgba(253,253,249,.5); }
+
+.pkg-price-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.pkg-badge {
+  background: var(--red); color: var(--snow);
+  font-family: var(--f-mono); font-size: 10px; font-weight: 700;
+  padding: 4px 10px; border-radius: 4px;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.pkg-price-val {
+  font-family: var(--f-display);
+  font-size: 56px; font-weight: 800;
+  line-height: 1;
+  display: flex; align-items: flex-start;
+  letter-spacing: -1px;
+}
+.pkg-price-cur {
+  font-size: 20px; font-weight: 700;
+  margin-top: 6px; margin-right: 4px; color: var(--muted);
+}
+.pkg-row.featured .pkg-price-cur { color: rgba(235,89,57,.8); }
+.pkg-row.featured .pkg-price-val { color: var(--red); }
+.pkg-price-meta {
+  font-family: var(--f-mono);
+  font-size: 10px; font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-align: right;
+  line-height: 1.5;
+}
+.pkg-row.featured .pkg-price-meta { color: rgba(253,253,249,.5); }
+
+.pkg-sep { height: 1px; background: var(--black); margin-bottom: 24px; opacity: 0.15; }
+.pkg-row.featured .pkg-sep { background: var(--snow); opacity: 0.2; }
+
+.pkg-feat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 48px;
+}
+@media(max-width: 768px) {
+  .pkg-feat-grid { grid-template-columns: 1fr; gap: 0; }
+  .pkg-header { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .pkg-price-wrap { align-items: flex-start; }
+  .pkg-price-meta { text-align: left; }
+  .pkg-row { padding: 24px; }
+}
+
+.pkg-feat-list { display: flex; flex-direction: column; }
+.pkg-feat-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px dotted rgba(14,14,14,.25);
+}
+.pkg-feat-list .pkg-feat-item:last-child { border-bottom: none; }
+.pkg-row.featured .pkg-feat-item { border-bottom: 1px dotted rgba(253,253,249,.25); }
+
+.pkg-feat-lbl {
+  font-family: var(--f-thai);
+  font-size: 15px; font-weight: 500;
+  color: rgba(14,14,14,.7);
+}
+.pkg-row.featured .pkg-feat-lbl { color: rgba(253,253,249,.8); }
+
+.pkg-feat-val {
+  font-family: var(--f-mono);
+  font-size: 14px; font-weight: 700;
+  color: var(--black);
+}
+.pkg-row.featured .pkg-feat-val { color: var(--snow); }
+
+.rate-strip { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:16px 20px; margin-bottom:24px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.rate-strip-lbl { font-family:var(--f-mono); font-size:12px; color:var(--muted); font-weight:700; text-transform:uppercase; letter-spacing:0; }
+.rate-chip { font-family:var(--f-mono); font-size:12px; font-weight:700; padding:4px 12px; border-radius:4px; border:1px solid var(--border); color:var(--fg); background:var(--snow); }
+.rate-chip.red { border-color:var(--red-mid); color:var(--red); background:var(--red-dim); }
+
+.calc-card { background:var(--snow); border:1px solid var(--border); border-radius:var(--radius-lg); padding:28px; margin-bottom:24px; }
+.calc-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin-bottom:16px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-brand">
+    <div class="nav-mark">🎬</div>
+    <div>
+      <div class="nav-name">FIRST DANCE</div>
+      <div class="nav-sub">POWERED BY SEEDANCE 2.0</div>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="index.html">Calculator</a>
+    <a href="pricing.html" class="active">Pricing</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Packages</div>
+  <h1>Three Tiers.<br><em>One Engine.</em></h1>
+  <p class="hero-desc">ซื้อ Credit เพื่อสร้างวิดีโอ AI คุณภาพสูงด้วย Seedance 2.0<br>ยิ่งซื้อแพ็กเกจใหญ่ ยิ่งคุ้มค่ากว่าเดิม</p>
+</section>
+
+<!-- RATE STRIP -->
+<div class="rate-strip">
+  <span class="rate-strip-lbl">อัตรา Credit/วิ</span>
+  <span class="rate-chip">Flagship 720p · 12 cr/วิ</span>
+  <span class="rate-chip">Flagship 1080p · 30 cr/วิ</span>
+  <span class="rate-chip">Fast 720p · 10 cr/วิ</span>
+  <span class="rate-chip red">1 Credit = 1,800 Tokens</span>
+</div>
+
+<!-- PACKAGES LIST -->
+<div class="pkg-list">
+
+  <!-- 1. STARTER -->
+  <div class="pkg-row">
+    <div class="pkg-header">
+      <div class="pkg-name-wrap">
+        <div class="pkg-name">Starter</div>
+        <div class="pkg-desc">Entry-level Volume</div>
+      </div>
+      <div class="pkg-price-wrap">
+        <div class="pkg-price-val"><span class="pkg-price-cur">$</span>9</div>
+        <div class="pkg-price-meta">One-time purchase<br>No expiry date</div>
+      </div>
+    </div>
+    <div class="pkg-sep"></div>
+    <div class="pkg-feat-grid">
+      <div class="pkg-feat-list">
+        <div class="pkg-feat-item">
+          <span class="pkg-feat-lbl">เครดิตที่ได้รับ</span>
+          <span class="pkg-feat-val">500 Credits</span>
+        </div>
+        <div class="pkg-feat-item">
+          <span class="pkg-feat-lbl">วิดีโอ 720p (Flagship)</span>
+          <span class="pkg-feat-val">~ 41 วินาที</span>
+        </div>
+        <div class="pkg-feat-item">
+          <span class="pkg-feat-lbl">วิดีโอ 1080p (Flagship)</span>
+          <span class="pkg-feat-val">~ 16 วินาที</span>
+        </div>
+      </div>
+      <div class="pkg-feat-list">
+        <div class="pkg-feat-item">
+          <span class="pkg-feat-lbl">ราคาต่อเครดิต</span>
+          <span class="pkg-feat-val">$0.018</span>
+        </div>
+        <div class="pkg-feat-item">
+          <span class="pkg-feat-lbl">ส่วนลด</span>
+          <span class="pkg-feat-val">ราคาปกติ</span>
+        </div>
+        <div class="pkg-feat-item">
+          <span class="pkg-feat-lbl">เหมาะสำหรับ</span>
+          <span class="pkg-feat-val">ทดลองใช้งาน</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. GROWTH -->
+  <div class="pkg-row featured">
+    <div class="pkg-header">
+      <div class="pkg-name-wrap">
+        <div class="pkg-name">Growth</div>
+        <div class="pkg-desc">Most Popular · Sweet Spot</div>
+      </div>
+      <div class="pkg-price-wrap">
+        <div class="pkg-badge">Recommended</div>
+        <div class="pkg-price-val"><span class="pkg-price-cur">$</span>30</div>
+        <div class="pkg-price-meta">One-time purchase<br>No expiry date</div>
+      </div>
+    </div>
+    <div class="pkg-sep"></div>
+    <div class="pkg-feat-grid">
+      <div class="pkg-feat-list">
+        <div class="pkg-feat-item">
+          <span class="pkg-feat-lbl">เครดิตที่ได้รับ</span>
+          <span class="pkg-feat-val">2,000 Credits</span>
+        </div>
+        <div class="pkg-feat-item">
+          <span class="pkg-feat-lbl">วิดีโอ 720p (Flagship)</span>
+          <span class="pkg-feat-val">~ 166 วินาที</span>
+        </div>
+        <div class="pkg-feat-item">
+          <span class="pkg-feat-lbl">วิดีโอ 1080p (Flagship)</span>
+          <span class="pkg-feat-val">~ 66 วินาที</span>
+        </div>
+      </div>
+      <div class="pkg-feat-list">
+        <div class="pkg-feat-item">
+          <span class="pkg-feat-lbl">ราคาต่อเครดิต</span>
+          <span class="pkg-feat-val">$0.015</span>
+        </div>
+        <div class="pkg-feat-item">
+          <span class="pkg-feat-lbl">ส่วนลด</span>
+          <span class="pkg-feat-val">ประหยัด 17%</span>
+        </div>
+        <div class="pkg-feat-item">
+          <span class="pkg-feat-lbl">เหมาะสำหรับ</span>
+          <span class="pkg-feat-val">โปรเจกต์ขนาดกลาง</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. DOMINATE -->
+  <div class="pkg-row">
+    <div class="pkg-header">
+      <div class="pkg-name-wrap">
+        <div class="pkg-name">Dominate</div>
+        <div class="pkg-desc">Aggressive Scale</div>
+      </div>
+      <div class="pkg-price-wrap">
+        <div class="pkg-price-val"><span class="pkg-price-cur">$</span>60</div>
+        <div class="pkg-price-meta">One-time purchase<br>No expiry date</div>
+      </div>
+    </div>
+    <div class="pkg-sep"></div>
+    <div class="pkg-feat-grid">
+      <div class="pkg-feat-list">
+        <div class="pkg-feat-item">
+          <span class="pkg-feat-lbl">เครดิตที่ได้รับ</span>
+          <span class="pkg-feat-val">5,000 Credits</span>
+        </div>
+        <div class="pkg-feat-item">
+          <span class="pkg-feat-lbl">วิดีโอ 720p (Flagship)</span>
+          <span class="pkg-feat-val">~ 416 วินาที</span>
+        </div>
+        <div class="pkg-feat-item">
+          <span class="pkg-feat-lbl">วิดีโอ 1080p (Flagship)</span>
+          <span class="pkg-feat-val">~ 166 วินาที</span>
+        </div>
+      </div>
+      <div class="pkg-feat-list">
+        <div class="pkg-feat-item">
+          <span class="pkg-feat-lbl">ราคาต่อเครดิต</span>
+          <span class="pkg-feat-val">$0.012</span>
+        </div>
+        <div class="pkg-feat-item">
+          <span class="pkg-feat-lbl">ส่วนลด</span>
+          <span class="pkg-feat-val">ประหยัด 33%</span>
+        </div>
+        <div class="pkg-feat-item">
+          <span class="pkg-feat-lbl">เหมาะสำหรับ</span>
+          <span class="pkg-feat-val">งานเชิงพาณิชย์</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. ENTERPRISE (Optional 4th tier based on previous data) -->
+  <div class="pkg-row">
+    <div class="pkg-header">
+      <div class="pkg-name-wrap">
+        <div class="pkg-name">Enterprise</div>
+        <div class="pkg-desc">For Teams & Agencies</div>
+      </div>
+      <div class="pkg-price-wrap">
+        <div class="pkg-price-val"><span class="pkg-price-cur">$</span>150</div>
+        <div class="pkg-price-meta">One-time purchase<br>No expiry date</div>
+      </div>
+    </div>
+    <div class="pkg-sep"></div>
+    <div class="pkg-feat-grid">
+      <div class="pkg-feat-list">
+        <div class="pkg-feat-item">
+          <span class="pkg-feat-lbl">เครดิตที่ได้รับ</span>
+          <span class="pkg-feat-val">15,000 Credits</span>
+        </div>
+        <div class="pkg-feat-item">
+          <span class="pkg-feat-lbl">วิดีโอ 720p (Flagship)</span>
+          <span class="pkg-feat-val">~ 1,250 วินาที</span>
+        </div>
+        <div class="pkg-feat-item">
+          <span class="pkg-feat-lbl">วิดีโอ 1080p (Flagship)</span>
+          <span class="pkg-feat-val">~ 500 วินาที</span>
+        </div>
+      </div>
+      <div class="pkg-feat-list">
+        <div class="pkg-feat-item">
+          <span class="pkg-feat-lbl">ราคาต่อเครดิต</span>
+          <span class="pkg-feat-val">$0.010</span>
+        </div>
+        <div class="pkg-feat-item">
+          <span class="pkg-feat-lbl">ส่วนลด</span>
+          <span class="pkg-feat-val">ประหยัด 44%</span>
+        </div>
+        <div class="pkg-feat-item">
+          <span class="pkg-feat-lbl">เหมาะสำหรับ</span>
+          <span class="pkg-feat-val">องค์กรขนาดใหญ่</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- CREDIT CALCULATOR -->
+<div class="section-label">คำนวณ Credit ที่ต้องใช้</div>
+<div class="calc-card">
+  <div class="card-title">ต้องซื้อ Credit เท่าไหร่?</div>
+  <div class="card-sub">ใส่สเปกวิดีโอ → คำนวณ Credit ที่ต้องใช้ และแนะนำแพ็กเกจที่เหมาะสม</div>
+  <div class="calc-grid">
+    <div class="field" style="margin:0">
+      <label>โมเดล & ความละเอียด</label>
+      <select id="c_model" onchange="calcPkg()">
+        <option value="f12">Flagship 720p (12 cr/วิ)</option>
+        <option value="f30">Flagship 1080p (30 cr/วิ)</option>
+        <option value="s10">Fast 720p (10 cr/วิ)</option>
+      </select>
+    </div>
+    <div class="field" style="margin:0">
+      <label>ความยาวคลิป (วินาที)</label>
+      <input type="number" id="c_sec" value="5" min="1" oninput="calcPkg()">
+    </div>
+    <div class="field" style="margin:0">
+      <label>จำนวนคลิป</label>
+      <input type="number" id="c_qty" value="10" min="1" oninput="calcPkg()">
+    </div>
+    <div class="field" style="margin:0">
+      <label>Video Processing Input (วิ) — Image/Video</label>
+      <input type="number" id="c_inp" value="0" min="0" oninput="calcPkg()">
+    </div>
+  </div>
+  <div class="stat-grid">
+    <div class="stat-box"><div class="stat-val" id="cr_total">—</div><div class="stat-lbl">Credit รวม</div></div>
+    <div class="stat-box"><div class="stat-val" id="cr_tokens">—</div><div class="stat-lbl">Token เทียบเท่า</div></div>
+    <div class="stat-box"><div class="stat-val" id="cr_min">—</div><div class="stat-lbl">นาทีวิดีโอ</div></div>
+    <div class="stat-box"><div class="stat-val red" id="cr_pkg">—</div><div class="stat-lbl">แพ็กเกจแนะนำ</div></div>
+  </div>
+</div>
+
+<!-- USAGE TABLE -->
+<div class="section-label">อัตราการใช้ Credit</div>
+<div style="background:var(--snow);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:24px">
+  <div style="padding:20px 24px 16px;border-bottom:1px solid var(--border)">
+    <div style="font-family:var(--f-editorial);font-size:20px;font-weight:400;margin-bottom:4px">Credit Consumption Rate</div>
+    <div style="font-size:14px;color:var(--muted)">อัตราการหัก Credit แยกตามประเภท: <strong>Standard Rate</strong> (Text to Video) และ <strong>Video Processing Rate</strong> (Image/Video to Video)</div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr>
+        <th>โมเดล</th><th>Resolution</th><th>Standard Rate<br><span style="font-size:10px;color:var(--muted);font-weight:500">(Text to Video)</span></th><th>Processing Rate<br><span style="font-size:10px;color:var(--muted);font-weight:500">(Image/Video Input)</span></th><th>5 วิ = cr</th><th>Token/cr</th><th>1,000 cr → นาที</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><span class="tag red">Flagship</span></td><td><span class="tag">720p</span></td><td class="mono">12</td><td class="mono">8</td><td class="mono">60</td><td class="mono">1,800</td><td class="mono red">1.39 นาที</td></tr>
+        <tr><td><span class="tag red">Flagship</span></td><td><span class="tag">1080p</span></td><td class="mono">30</td><td class="mono">20</td><td class="mono">150</td><td class="mono">1,800</td><td class="mono red">0.56 นาที</td></tr>
+        <tr><td><span class="tag">Fast</span></td><td><span class="tag">720p</span></td><td class="mono">10</td><td class="mono">7</td><td class="mono">50</td><td class="mono">1,800</td><td class="mono red">1.67 นาที</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<footer class="footer">
+  FIRST DANCE &nbsp;·&nbsp; Powered by <a href="https://seedance2.ai">Seedance 2.0</a> &nbsp;·&nbsp; <a href="index.html">← Calculator</a>
+</footer>
+
+</div>
+
+<script>
+function fi(n){return Math.round(n).toLocaleString('th-TH')}
+function ff(n,d=1){return Number(n).toLocaleString('th-TH',{minimumFractionDigits:d,maximumFractionDigits:d})}
+const RATES={f12:{cr:12,ci:8},f30:{cr:30,ci:20},s10:{cr:10,ci:7}};
+const PKGS=[{n:'Starter',cr:500},{n:'Growth',cr:2000},{n:'Dominate',cr:5000},{n:'Enterprise',cr:15000}];
+
+function calcPkg(){
+  const model=document.getElementById('c_model').value;
+  const sec=parseFloat(document.getElementById('c_sec').value)||0;
+  const qty=parseFloat(document.getElementById('c_qty').value)||1;
+  const inp=parseFloat(document.getElementById('c_inp').value)||0;
+  const r=RATES[model];
+  const credits=inp>0?r.ci*(inp+sec*qty):r.cr*sec*qty;
+  const tokens=credits*1800,mins=(sec*qty)/60;
+  const pkg=PKGS.find(p=>p.cr>=credits)||PKGS[PKGS.length-1];
+  document.getElementById('cr_total').textContent=fi(credits);
+  document.getElementById('cr_tokens').textContent=fi(tokens);
+  document.getElementById('cr_min').textContent=ff(mins)+'m';
+  document.getElementById('cr_pkg').textContent=pkg.n;
+}
+window.onload=calcPkg;
+</script>
+</body>
+</html>
